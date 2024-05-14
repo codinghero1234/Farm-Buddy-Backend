@@ -4,6 +4,10 @@ import { authMiddleware } from "../middlewares/auth.middleware.js";
 
 const authRouter = express.Router();
 
+authRouter.get("/test", (req, res) => {
+    res.status(200).json("Hello, Farm Buddy !");
+});
+
 authRouter.post("/send_otp", verifyEmailController);
 authRouter.post("/verify", verifyOTPAndCreateAccountController);
 authRouter.post("/login", loginController);
