@@ -43,16 +43,29 @@ export const getAnimalController = async (req, res) => {
     }
 }
 
-export const editAnimalDetailsController = async (req, res) => {
-    const data = req.body;
+export const getAllAnimalController = async (req, res) => {
     try {
-        const updatedAnimal = await animalModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
-        if(!updatedAnimal){
-            return res.status(400).json("Error updating the animal details");
+        const animal = await animalModel.find();
+        if (!animal) {
+            return res.status(404).json("Animals not found");
         }
-        return res.status(200).json(updatedAnimal);
+        return res.status(200).json(animal);
     } catch (error) {
         console.error(error.message);
         return res.status(400).json(error.message);
     }
 }
+
+// export const editAnimalDetailsController = async (req, res) => {
+//     const data = req.body;
+//     try {
+//         const updatedAnimal = await animalModel.findOneAndUpdate({ _id: data._id }, data, { new: true });
+//         if(!updatedAnimal){
+//             return res.status(400).json("Error updating the animal details");
+//         }
+//         return res.status(200).json(updatedAnimal);
+//     } catch (error) {
+//         console.error(error.message);
+//         return res.status(400).json(error.message);
+//     }
+// }
