@@ -1,16 +1,19 @@
 import express from "express";
-import { addAnimalController, getAllAnimalController, getAnimalController } from "../controllers/animal.controller.js";
-import { uploadMemory } from "../services/file_upload.js";
+import { addanimalController, deleteanimalController, editanimalController, getAllanimalController, getanimalController, getMYanimalController } from "../controllers/animal.controller.js";
 
 const animalRouter = express.Router();
 
-animalRouter.post("/", uploadMemory.single('file') , addAnimalController);
+animalRouter.post("/", addanimalController);
 
-animalRouter.get("/all", getAllAnimalController);
+animalRouter.get("/all", getAllanimalController);
 
-animalRouter.get("/:id", getAnimalController);
+animalRouter.get("/my", getMYanimalController);
 
+animalRouter.get("/:id", getanimalController);
 
+animalRouter.delete("/:id", deleteanimalController);
+
+animalRouter.patch("/", editanimalController);
 
 
 export default animalRouter;

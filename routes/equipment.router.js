@@ -1,13 +1,19 @@
 import express from "express";
-import { uploadMemory } from "../services/file_upload.js";
-import { addNewEquipmentController, getAllEquipmentController, getEquipmentController } from "../controllers/equipment.controller.js";
+import { addequipmentController, deleteequipmentController, editequipmentController, getAllequipmentController, getequipmentController, getMYequipmentController } from "../controllers/equipment.controller.js";
 
-const EquipmentRouter = express.Router();
+const equipmentRouter = express.Router();
 
-EquipmentRouter.post("/", uploadMemory.single('file'), addNewEquipmentController);
+equipmentRouter.post("/", addequipmentController);
 
-EquipmentRouter.get("/all", getAllEquipmentController);
+equipmentRouter.get("/all", getAllequipmentController);
 
-EquipmentRouter.get("/:id", getEquipmentController);
+equipmentRouter.get("/my", getMYequipmentController);
 
-export default EquipmentRouter;
+equipmentRouter.get("/:id", getequipmentController);
+
+equipmentRouter.delete("/:id", deleteequipmentController);
+
+equipmentRouter.patch("/", editequipmentController);
+
+
+export default equipmentRouter;

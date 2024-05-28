@@ -1,13 +1,19 @@
 import express from "express";
-import { uploadMemory } from "../services/file_upload.js";
-import { addNewProductController, getAllProductController, getProductController } from "../controllers/product.controller.js";
+import { addproductController, deleteproductController, editproductController, getAllproductController, getproductController, getMYproductController } from "../controllers/product.controller.js";
 
-const ProductRouter = express.Router();
+const productRouter = express.Router();
 
-ProductRouter.post("/", uploadMemory.single('file'), addNewProductController);
+productRouter.post("/", addproductController);
 
-ProductRouter.get("/all", getAllProductController);
+productRouter.get("/all", getAllproductController);
 
-ProductRouter.get("/:id", getProductController);
+productRouter.get("/my", getMYproductController);
 
-export default ProductRouter;
+productRouter.get("/:id", getproductController);
+
+productRouter.delete("/:id", deleteproductController);
+
+productRouter.patch("/", editproductController);
+
+
+export default productRouter;

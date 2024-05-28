@@ -12,11 +12,15 @@ const app = express();
 const PORT = 8000;
 
 // default middlewares
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(cors());
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: true })); 
 
 // middlewares
+app.use((req, res, next) => {
+    console.log(req.path);
+    console.log(req.body);
+    next();
+});
 
 // routes
 app.use("/api/v1", router);

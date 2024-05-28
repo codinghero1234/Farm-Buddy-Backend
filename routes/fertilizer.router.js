@@ -1,13 +1,19 @@
 import express from "express";
-import { uploadMemory } from "../services/file_upload.js";
-import { addNewFertilizerController, getAllFertilizerController, getFertilizerController } from "../controllers/fertilizer.controller.js";
+import { addfertilizerController, deletefertilizerController, editfertilizerController, getAllfertilizerController, getfertilizerController, getMYfertilizerController } from "../controllers/fertilizer.controller.js";
 
 const fertilizerRouter = express.Router();
 
-fertilizerRouter.post("/", uploadMemory.single('file'), addNewFertilizerController);
+fertilizerRouter.post("/", addfertilizerController);
 
-fertilizerRouter.get("/all", getAllFertilizerController);
+fertilizerRouter.get("/all", getAllfertilizerController);
 
-fertilizerRouter.get("/:id", getFertilizerController);
+fertilizerRouter.get("/my", getMYfertilizerController);
+
+fertilizerRouter.get("/:id", getfertilizerController);
+
+fertilizerRouter.delete("/:id", deletefertilizerController);
+
+fertilizerRouter.patch("/", editfertilizerController);
+
 
 export default fertilizerRouter;

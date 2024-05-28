@@ -1,51 +1,99 @@
+import express from "express";
+import mongoose from "mongoose";
 import { equipmentModel } from "../models/equipment.model.js";
 
-export const addNewEquipmentController = async (req, res) => {
-    console.log(req.file);
-    const data = req.body;
-    console.log(data);
-    console.log(data.description);
+export const addequipmentController = async (req, res) => {
+    const email = req.email;
+    console.log(`${email} this is the email bro`);
+    let data = req.body;
+    data.email = req.email;
     try {
-        const newEquipment = await equipmentModel.create({
-            ...data,
-            photo: req.file.buffer,
-            photo_originalName: req.file.originalname,
-            photo_mimetype: req.file.mimetype
-        });
-        if (!newEquipment) {
-            return res.status(400).json("Error creating new Equipment");
+        const newequipment = await equipmentModel.create(data);
+        if (!newequipment) {
+            return res.status(400).json("Error creating new equipment");
         }
-        return res.status(200).json(newEquipment);
+        return res.status(200).json(newequipment);
     } catch (error) {
         console.error(error.message);
         return res.status(400).json(error.message);
     }
 }
 
-export const getEquipmentController = async (req, res) => {
+export const getequipmentController = async (req, res) => {
     const id = req.params.id;
     try {
-        const Equipment = await equipmentModel.findById(id);
-        if (!Equipment) {
-            return res.status(404).json("Equipment not found");
+        const equipment = await equipmentModel.findById(id);
+        if (!equipment) {
+            return res.status(404).json("equipment not found");
         }
-        return res.status(200).json(Equipment);
+        return res.status(200).json(equipment);
     } catch (error) {
         console.error(error.message);
         return res.status(400).json(error.message);
     }
 }
 
-export const getAllEquipmentController = async (req, res) => {
+export const getAllequipmentController = async (req, res) => {
     try {
-        const Equipment = await equipmentModel.find();
-        console.log("hi");
-        if (!Equipment) {
-            return res.status(404).json("Equipments not found");
+        const equipment = await equipmentModel.find();
+        if (!equipment) {
+            return res.status(404).json("equipments not found");
         }
-        console.log("hi");
+        return res.status(200).json(equipment);
+    } catch (error) {
+        console.error(error.message);
+        return res.status(400).json(error.message);
+    }
+}
 
-        return res.status(200).json(Equipment);
+export const deleteequipmentController = async(req,res) => {
+    const email = req.email;
+    const id = req.params.id;
+    try {
+        const equipment  = await equipmentModel.findOne({_id: id});
+        if(!equipment){
+            return res.status(400).json("equipment not found !");
+        }
+        if(equipment.email != email){
+            return res.status(401).json("This equipment is not yours , you can't delete it, only creator can delete it");
+        }
+        const deletedequipment = await equipmentModel.findByIdAndDelete(id);
+        if(!deletedequipment){
+            return res.status(400).json("Error deleting the equipment");
+        }
+        return res.status(200).json("equipment Deleted Succesfully !");
+    } catch (error) {
+        console.error(error.message);
+        return res.status(400).json(error.message);
+    }
+}
+
+export const editequipmentController = async(req, res) => {
+    const data = req.body;
+    const email = req.email;
+    try {
+        if(email != data.email){
+            return res.status(401).json("You don't have permission to edit this item");
+        }
+        const updatedequipment = await equipmentModel.findOneAndUpdate({_id: data._id}, data, {new: true});
+        if(!updatedequipment){
+            return res.status(400).json("Error editing the equipment");
+        }
+        return res.status(200).json(updatedequipment);
+    } catch (error) {
+        console.error(error.message);
+        return res.status(400).json(error.message);
+    }
+}
+
+export const getMYequipmentController = async(req, res) => {
+    const email = req.email;
+    try {
+        const equipments = await equipmentModel.find({email: email});
+        if(!equipments){
+            return res.status(400).json("Error getting your equipments");
+        }
+        return res.status(200).json(equipments);
     } catch (error) {
         console.error(error.message);
         return res.status(400).json(error.message);

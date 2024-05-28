@@ -16,6 +16,12 @@ export const verifyEmailController = async (req, res) => {
         const data = req.body;
         console.log(data.email, data.password, data.name, data.address);
         console.log(data.password.length);
+
+        // check if email exists
+        const existing = await userModel.findOne({email: data.email});
+        if(existing ){
+            return res.status(400).json("This account already existing, please try signing in");
+        }
         // server side validation
         if (!data.email || data.email == "") {
             return res.status(400).json("Please Enter Email Address");
