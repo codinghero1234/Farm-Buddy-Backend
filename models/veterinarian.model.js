@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const veternarySchema = new mongoose.Schema({
+const veterinarianSchema = new mongoose.Schema({
     username: {type: String, required: true},
     aadhar_number: {type: String, required: true},
     email: {type: String, required: true},
@@ -24,8 +24,10 @@ const veternarySchema = new mongoose.Schema({
     opening_time: {type: String, required: true},
     closing_time: {type: String, required: true},
     service_area: {type: String, required: true},
+    photo_url: {type: String},
+    email: {type: String, required: true}
 }, {timestamps: true});
 
-const veternaryModel = mongoose.model("veternarys", veternarySchema);
+const veterinarianModel = mongoose.model("veterinarians", veterinarianSchema);
 
-export default veternaryModel;
+export default veterinarianModel;
