@@ -7,6 +7,7 @@ import EquipmentRouter from "./equipment.router.js";
 import ProductRouter from "./product.router.js";
 import transportationRouter from "./transportation.router.js";
 import veternaryRouter from "./veterinarian.router.js";
+import tourismRouter from "./tourism.router.js";
 
 const router = express.Router();
 
@@ -17,5 +18,6 @@ router.use("/equipment", authMiddleware, EquipmentRouter);
 router.use("/grains", authMiddleware, ProductRouter);
 router.use("/transport", authMiddleware, transportationRouter);
 router.use("/veterinarian", authMiddleware, veternaryRouter);
+router.use("/tourism", authMiddleware, tourismRouter);
 
 export default router;
