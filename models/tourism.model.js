@@ -16,4 +16,6 @@ const tourismSchema = new mongoose.Schema({
     total_price: {type: String, required: true}
 }, {timestamps: true});
 
-export const tourismModel  = mongoose.model('tourisms', tourismSchema);
+ const tourismModel  = mongoose.model('tourisms', tourismSchema);
+
+ export default tourismModel;

@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import { tourismModel } from "../models/tourism.model.js";
+import tourismModel  from "../models/tourism.model.js";
 
 export const addtourismController = async (req, res) => {
     const email = req.email;

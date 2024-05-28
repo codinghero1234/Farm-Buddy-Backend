@@ -8,6 +8,8 @@ import ProductRouter from "./product.router.js";
 import transportationRouter from "./transportation.router.js";
 import veternaryRouter from "./veterinarian.router.js";
 import tourismRouter from "./tourism.router.js";
+import labourRouter from "./labour.router.js";
+import soilRouter from "./soil.router.js";
 
 const router = express.Router();
 
@@ -19,5 +21,7 @@ router.use("/grains", authMiddleware, ProductRouter);
 router.use("/transport", authMiddleware, transportationRouter);
 router.use("/veterinarian", authMiddleware, veternaryRouter);
 router.use("/tourism", authMiddleware, tourismRouter);
+router.use("/labour", authMiddleware, labourRouter);
+router.use("/soil", authMiddleware, soilRouter);
 
 export default router;
