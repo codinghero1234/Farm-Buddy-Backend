@@ -13,7 +13,7 @@ const productSchema = new mongoose.Schema({
     diet_type: { type: String, required: true },
     net_quantity: { type: String, required: true },
     contact: { type: String, required: true },
-}, { timestamps: true });
+}, { timestamps: true });   
 
 
 export const productModel = mongoose.model("products", productSchema)

@@ -14,7 +14,7 @@ router.use("/auth", authRouter);
 router.use("/animal", authMiddleware ,animalRouter);    
 router.use("/fertilizer", authMiddleware,fertilizerRouter);
 router.use("/equipment", authMiddleware, EquipmentRouter);
-router.use("/product", authMiddleware, ProductRouter);
+router.use("/grains", authMiddleware, ProductRouter);
 router.use("/transport", authMiddleware, transportationRouter);
 router.use("/veterinarian", authMiddleware, veternaryRouter);
 
