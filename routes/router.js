@@ -10,6 +10,7 @@ import veternaryRouter from "./veterinarian.router.js";
 import tourismRouter from "./tourism.router.js";
 import labourRouter from "./labour.router.js";
 import soilRouter from "./soil.router.js";
+import promptRouter from "./prompt.router.js";
 
 const router = express.Router();
 
@@ -23,5 +24,6 @@ router.use("/veterinarian", authMiddleware, veternaryRouter);
 router.use("/tourism", authMiddleware, tourismRouter);
 router.use("/labour", authMiddleware, labourRouter);
 router.use("/soil", authMiddleware, soilRouter);
+router.use("/prompt", authMiddleware, promptRouter);
 
 export default router;
